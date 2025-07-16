@@ -49,22 +49,50 @@ document.getElementById('form-entree').addEventListener('submit', async e => {
   e.preventDefault();
   const form = e.target;
   const data = new FormData(form);
+
   try {
     const resp = await fetch(`${BACKEND_URL}/traitement_entree.php`, {
       method: 'POST',
       body: data,
     });
-    const text = await resp.text();
-    console.log(text);
-    document.getElementById('entree-message').innerHTML = text;
-    form.reset();
-    personnelContainer.style.display = 'none';
-    formationContainer.style.display = 'none';
+    const res = await resp.json();
+
+    if (res.succes) {
+      // Remplir les champs de confirmation
+      document.getElementById('conf-nom').textContent = res.nom;
+      document.getElementById('conf-prenom').textContent = res.prenom;
+      document.getElementById('conf-horodatage').textContent = res.horodatage;
+      document.getElementById('conf-qr').textContent = res.qr_code_id;
+
+      if (res.objet === 'formation') {
+        document.getElementById('conf-objet').textContent =
+          "Vous assistez à la formation : " + res.intitule;
+      } else if (res.objet === 'personnel') {
+        document.getElementById('conf-objet').textContent =
+          "Vous allez rencontrer : " + res.personnel;
+      }
+
+      // Affiche la zone de confirmation
+      document.getElementById('confirmation').style.display = 'block';
+
+      // Lance l’impression après un court délai
+      setTimeout(() => {
+        window.print();
+      }, 500);
+
+      // Reset + masquage des autres blocs
+      form.reset();
+      personnelContainer.style.display = 'none';
+      formationContainer.style.display = 'none';
+    } else {
+      document.getElementById('entree-message').textContent = 'Erreur lors de l\'enregistrement.';
+    }
   } catch (err) {
-    document.getElementById('entree-message').textContent = 'Erreur lors de l\'envoi';
+    document.getElementById('entree-message').textContent = 'Erreur lors de l\'envoi.';
     console.error(err);
   }
 });
+
 
 // Soumission formulaire sortie
 document.getElementById('form-sortie').addEventListener('submit', async e => {
