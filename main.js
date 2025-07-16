@@ -1,5 +1,5 @@
 // Remplace ici par l'URL complète de ton backend déployé
-const BACKEND_URL = 'https://https://ingrwf12.cepegra-frontend.xyz/luciano_admin';
+const BACKEND_URL = 'https://ingrwf12.cepegra-frontend.xyz/luciano_admin';
 
 // Chargement dynamique des personnels
 async function loadPersonnels() {
