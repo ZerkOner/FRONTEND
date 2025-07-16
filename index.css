@@ -80,13 +80,38 @@ button:hover {
   margin-top: 10px;
 }
 @media print {
-  body > *:not(#confirmation) {
-    display: none;
+  body {
+    margin: 0;
+    padding: 0;
   }
+
+  /* Imprimer uniquement #confirmation */
+  body > *:not(#confirmation) {
+    display: none !important;
+  }
+
   #confirmation {
     display: block !important;
+    width: 7cm;
+    height: 15cm;
+    margin: auto;
+    padding: 1cm;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    font-size: 14pt;
+    text-align: center;
+    page-break-inside: avoid;
   }
+
+  #confirmation button,
   .no-print {
-    display: none;
+    display: none !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 0;
   }
 }
+
+
