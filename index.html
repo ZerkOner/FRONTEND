@@ -10,6 +10,11 @@
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#2c3e50" />
   <link rel="apple-touch-icon" href="icons/android-chrome-192x192.png" />
+  <script>
+    function imprimerConfirmation() {
+      window.print();
+    }
+  </script>
 </head>
 <body>
 
@@ -72,8 +77,15 @@
   <div id="sortie-message"></div>
 </div>
 
+<div id="confirmation" class="printable" style="display:none;">
+  <h2>Bienvenue, <span id="conf-nom"></span> <span id="conf-prenom"></span> !</h2>
+  <p>Votre entrée a été enregistrée à <span id="conf-horodatage"></span>.</p>
+  <p id="conf-objet"></p>
+  <p>Voici votre identifiant unique : <strong id="conf-qr"></strong></p>
+  <button class="no-print" onclick="imprimerConfirmation()">Imprimer</button>
+</div>
+
 <script src="tabs.js"></script>
 <script src="main.js"></script>
-
 </body>
 </html>

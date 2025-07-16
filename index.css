@@ -79,3 +79,14 @@ button:hover {
 .sub-container {
   margin-top: 10px;
 }
+@media print {
+  body > *:not(#confirmation) {
+    display: none;
+  }
+  #confirmation {
+    display: block !important;
+  }
+  .no-print {
+    display: none;
+  }
+}

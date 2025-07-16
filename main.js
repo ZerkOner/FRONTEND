@@ -55,6 +55,7 @@ document.getElementById('form-entree').addEventListener('submit', async e => {
       body: data,
     });
     const text = await resp.text();
+    console.log(text);
     document.getElementById('entree-message').innerHTML = text;
     form.reset();
     personnelContainer.style.display = 'none';
